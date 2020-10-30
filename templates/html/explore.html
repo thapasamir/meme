@@ -1,0 +1,17 @@
+{%extends 'html/base.html'%}
+{% load static %}
+
+{% load static %}
+{% block main %}
+
+<div class="row row-cols-12 row-cols-md-5">
+{% for i in reasult %}
+  <div class="col mb-4">
+    <div class="card">
+      <a href="{{i.photo.url}}" download>
+      <img src="{{i.photo.url}}" class="card-img-top" alt="..."></a>
+    </div>
+  </div>
+ {% endfor %}
+</div>
+{% endblock main %}
