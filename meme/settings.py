@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'meme.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ddpue59cd3hqbu', 
+        'USER': 'ofljasjfymyhit', 
+        'PASSWORD': '3a5cfb7eb469c784eef20ac5440f6248e0fcfa66ff7cce40af7b75784bd54db9',
+        'HOST': 'ec2-35-168-77-215.compute-1.amazonaws.com', 
+        'PORT': '5432',
     }
 }
 
