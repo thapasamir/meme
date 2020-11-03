@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
 
+
 ]
 
 MIDDLEWARE = [
@@ -155,3 +156,5 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
