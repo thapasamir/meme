@@ -1,17 +1,49 @@
 
 {%extends 'html/base.html'%}
 {% load static %}
+{% block search %}
+    <form class="form-inline">
+      {{search.form.Title}}
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+{% endblock search %}
 {% block main %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Hello {{request.user}}</strong> You have to click on explore to explore particular section
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Note:</strong>{{request.user}} you have to login to go to explore section and to download meme templates which is totally free
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <div class="container-fluid" >
   {%for i in Cateogry%}
   <div class="row no-gutters">
     <div class="col-md-4">
       <img src="{{i.photo.url}}" class="card-img" alt="...">
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8" style="">
+      <br>
       <div class="card-body">
-        <h5 class="card-title">{{i.Title}}</h5>
-        <p class="card-text">{{i.Description}}</p>
+      <h5 class="card-title">{{i.Title}}</h5>
+  
+  <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Detail</a>
+  <br>
+
+<div class="row">
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample1">
+      <div class="card card-body">
+       {{i.Description}}
+      </div>
+    </div>
+  </div>
+</div>
+        
         <p class="card-text"><small class="text-muted">{{i.upload_date}}</small></p>
         <a type="submit" href="{% url 'explore' i.id %}" class="btn btn-outline-success">Exlore</a>
         </form>

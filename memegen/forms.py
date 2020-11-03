@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm,TextInput,Textarea 
 from .models import Create_Post,Create_Cateogry
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -8,6 +8,10 @@ class Create_CateogryForm(ModelForm):
 	class Meta:
 		model = Create_Cateogry
 		fields = ('Title','Description','photo')
+		widgets = {
+            'Title': TextInput(attrs={'class': 'form-control', 'id': 'validationTooltip01'}),
+            'Description': Textarea(attrs={'class': 'form-control', 'id': 'validationTooltip01'}),
+        }
 
 
 class Create_PostForm(ModelForm):

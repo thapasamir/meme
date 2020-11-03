@@ -1,13 +1,37 @@
 {%extends 'html/base.html'%}
 {% load static %}
 {% block main %}
-<div class="container center_div">
-	<form method="POST" enctype="multipart/form-data"> 
+<div class="container-sm">
+<form class="needs-validation" novalidate method="POST" enctype="multipart/form-data">
     {% csrf_token %} 
-    {{ form.as_p }} 
-    <input type="submit" value="Submit"> 
-</form> 
-	</form>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationTooltip01">{{form.Title.label}}</label>
+      {{form.Title}}
+      <div class="valid-tooltip">
+        Looks good!
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="validationTooltip02">{{form.Description.label}}</label>
+      {{form.Description}}
+      <div class="valid-tooltip">
+        Looks good!
+      </div>
+      <br>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationTooltip03">Image</label>
+      {{form.photo}}
+      <div class="invalid-tooltip">
+        Please provide a valid Photo
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit">Create</button>
+</form>
 </div>
-
+</div>
 {% endblock main %}

@@ -5,18 +5,25 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-from .filter import PostFilters
+from .filter import PostFilters,CatFilters
+from .decorators import unauthenticated_user,allowed_user
+from django.contrib.auth.models import Group
 #Views section of of homepage
 def home(request):
+	
 	post = Create_Post.objects.all()
+
 	search = PostFilters(request.GET,queryset=post)
+	
 	post = search.qs
-	return render(request,'html/home.html',{'post':post,'search':PostFilters})
+	return render(request,'html/home.html',{'post':post,'search':PostFilters,})
 
 #Views section of cateogry  page
 def cateogry(request):
 	Cateogry = Create_Cateogry.objects.all()
-	return render(request,'html/cateogry.html',{'Cateogry':Cateogry})
+	search = PostFilters(request.GET,queryset=Cateogry)
+	Cateogry = search.qs
+	return render(request,'html/cateogry.html',{'Cateogry':Cateogry,'search':PostFilters})
 
 #Views section of explore  page
 @login_required(login_url='log_in')
@@ -26,6 +33,7 @@ def explore(request,id):
 
 
 #Views section of login page
+@unauthenticated_user
 def log_in(request):
 	if request.method == "POST":
 		username = request.POST.get('username')
@@ -37,7 +45,7 @@ def log_in(request):
 		else:
 			messages.info(request,"Your username or password is incorrect")
 
-	return render(request,'admin/login.html')
+	return render(request,'admin/login2.html')
 
 #Views section of login page
 def log_out(request):
@@ -54,9 +62,11 @@ def signup(request):
 		if request.method == "POST":
 			form = UserCreationform(request.POST)
 			if form.is_valid():
-				form.save()
-				name = form.cleaned_data.get('username')
-				messages.success(request,"Yor account was created " + name)
+				user = form.save()
+				username = form.cleaned_data.get('username')
+				group = Group.objects.get(name="u_ser")  ####################################(u_ser)
+				user.groups.add(group)
+				messages.success(request,"Yor account was created " + username)
 				return redirect('log_in')
 
 
@@ -74,31 +84,33 @@ def article(request):
 	return render(request,'html/article.html')
 
 #Views section of createpost
+@login_required
+@allowed_user(allowed_roles=['admin','staff'])
 def createpost(request):
 	form = Create_PostForm()
 	if request.method == "POST":
 		print("I am worling very finely")
 		form = Create_PostForm(request.POST, request.FILES)
 		if form.is_valid():
-			Title = form.cleaned_data.get("Title")
-			photo = form.cleaned_data.get("photo")
-			post_cateogry = form.cleaned_data.get("cateogry")
-			#emails = form.cleaned_data.get("share_email_with")
-			users = Create_Post.objects.filter(cateogry=post_cateogry)
-			#users = User.objects.filter(email__in=emails)
-			obj = Create_Post.objects.create( Title = Title,photo = photo)
-			obj.save()
-			#instance = Setupuser.objects.create(organization=org)
-			obj.cateogry.add(users)
-
-
-
-
-
+			form.save()
+			return redirect("/")
+			
 	return render(request,'admin/createpost.html',{'form':form})
 
+#Views section of manage_post
+@login_required
+@allowed_user(allowed_roles=['admin','staff'])
+def managepost(request,id):
+	post = Create_Post.objects.all()
+	delete = Create_Post.objects.get(pk=id)
+	if request.method == "POST":
+		pass
+
+	return render(request,'admin/managepost.html',{'pst':post})
 
 #Views section of creategroup
+@login_required
+@allowed_user(allowed_roles=['admin','staff'])##############################################(admin)
 def createcateogry(request):
 	form = Create_CateogryForm()
 	if request.method == "POST":
@@ -113,8 +125,7 @@ def createcateogry(request):
                                  photo = photo,
                                  Description = Description,
                                  ) 
-			obj2 = Create_Cateogry.objects.filter(Description=Description)
-			obj2.save()
+			
 			obj.save()
 	else:
 		form = Create_CateogryForm()

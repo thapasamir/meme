@@ -1,10 +1,20 @@
 {%extends 'html/base.html'%}
 {% load static %}
-
-{% load static %}
 {% block main %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Hello {{request.user}}</strong> click on the image  to download meme template 
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Note::</strong> You must have to be logined to download templates
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 
-<div class="row row-cols-12 row-cols-md-5">
+<div class="row row-cols-12 row-cols-md-5" style="text-align: center;">
 {% for i in reasult %}
   <div class="col mb-4">
     <div class="card">

@@ -13,7 +13,8 @@ urlpatterns = [
     path('cateogry',views.cateogry,name="cateogry"),
     path('explore/<str:id>',views.explore,name="explore"),
     path('createcateogry',views.createcateogry,name="createcateogry"),
-    path('createpost',views.createpost,name="createpost")
+    path('createpost',views.createpost,name="createpost"),
+    path('managepost/<str:id>',views.managepost,name="managepost")
     
 ]
 if settings.DEBUG:

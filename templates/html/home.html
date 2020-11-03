@@ -1,27 +1,33 @@
 
 {%extends 'html/base.html'%}
 {% load static %}
+{% block search %}
+    <form class="form-inline">
+    	{% csrf_token %}
+    	{{search.form.Title}}
+    	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+ 	</form>
+{% endblock search %}
 {% block main %}
-<div class="container-fluid mx-auto">
-	<form class="form-inline my-2 my-lg-0" method="GET">
-		{% csrf_token %}
-		{{search.form}}
-		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-	</form>
-	<div class="row row-cols-1 row-cols-md-3 mx-auto">
-	  <div class="col mb-4 mx-auto">
-	  	{%for i in post%}
-	    <div class="card mx-auto">
-	      <img src="{{ i.photo.url }}" class="card-img-top" alt="...">
-	      <div class="card-body">
-	        <h5 class="card-title">{{i.Title}}</h5>
-	        <p class="card-text"><small class="text-muted">Upload Date: {{i.upload_date}}</small></p>
-	        <button type="button" class="btn btn-dark">Download</button>
-	      </div>
-	    </div>
-	    <br>
-	    {%endfor%}
-	  </div>
-	</div>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Hello {{request.user}}</strong> You should check cateogry section if you want the templates of specific type
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
+ {% for x in post %}
+ {% if forloop.first %}<div class="row ">{% endif %}
+ <div class="col-lg-4 col-md-4 col-12" >
+<div class="text-center mt-2">
+<img src="{{x.photo.url}}"  height="70%" width="70%" class="img-thumbnail" alt="...">
+ <h4 class="text-center" ><small class="text-muted">{{x.Title}}</small></h4></div>
+ </div>
+{% if forloop.counter|divisibleby:3 %}
+</div>
+<div class=row>{% endif %}
+        
+{% if forloop.last %}</div>{% endif %}
+    
+{% endfor %}
+
 {% endblock main %}

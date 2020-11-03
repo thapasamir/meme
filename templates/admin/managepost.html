@@ -1,0 +1,28 @@
+
+{%extends 'html/base.html'%}
+{% load static %}
+{% block main %}
+
+<div class="container-fluid" >
+  {%for i in pst%}
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{{i.photo.url}}" class="card-img" alt="...">
+    </div>
+    <div class="col-md-8" style="">
+      <br>
+      <form action="POST">
+        <a type="submit" href="{% url 'explore' i.id %}" class="btn btn-outline-success">Exlore</a>
+      </form>
+      <div class="card-body">
+      <h5 class="card-title">{{i.Title}}</h5>
+      </div>
+      <br>
+    </div>
+    <br>
+  </div>
+  <br>
+{% endfor %}
+</div>
+
+{% endblock main %}
