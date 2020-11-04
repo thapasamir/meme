@@ -159,9 +159,9 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-cloudinary.config(
-  cloud_name = os.environ.get('samirthapa'),
-  api_key = os.environ.get('816878767891975'),
-  api_secret = os.environ.get('cqBDDQfwzRsQ3R9gQwCQ7XoJWcA'),
-  secure = True
+
+cloudinary.config( 
+  cloud_name = "samirthapa", 
+  api_key = "816878767891975", 
+  api_secret = "cqBDDQfwzRsQ3R9gQwCQ7XoJWcA" 
 )

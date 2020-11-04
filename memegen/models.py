@@ -1,5 +1,4 @@
 from django.db import models
-from django.db import models
 from cloudinary.models import CloudinaryField
 
 class Create_Cateogry(models.Model):
