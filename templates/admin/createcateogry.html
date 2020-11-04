@@ -1,6 +1,7 @@
 {%extends 'html/base.html'%}
 {% load static %}
 {% block main %}
+{% load cloudinary %}
 <div class="container-sm">
 <form class="needs-validation" novalidate method="POST" enctype="multipart/form-data">
     {% csrf_token %} 

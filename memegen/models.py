@@ -5,7 +5,7 @@ from cloudinary.models import CloudinaryField
 class Create_Cateogry(models.Model):
 	Title = models.CharField(max_length=100,null=True)
 	Description = models.CharField(max_length=100,null=True)
-	photo = CloudinaryField('image')
+	photo = CloudinaryField('photo')
 	upload_date = models.DateTimeField(auto_now_add=True, blank=True)
 	def __str__(self):
 		return self.Title
@@ -13,7 +13,7 @@ class Create_Cateogry(models.Model):
 
 class Create_Post(models.Model):
 	Title = models.CharField(max_length=100,null=True)
-	photo = CloudinaryField('image')
+	photo = CloudinaryField('photo')
 	upload_date = models.DateTimeField(auto_now_add=True, blank=True,)
 	cateogry = models.ManyToManyField(Create_Cateogry)
 
