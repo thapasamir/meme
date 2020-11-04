@@ -1,6 +1,9 @@
 import os
 from pathlib import Path
-import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -34,6 +37,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'cloudinary'
 
 
 
@@ -89,9 +93,7 @@ DATABASES = {
     }
 }
 
-db = dj_database_url.config()
 
-DATABASES['default'].update(db)
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -158,3 +160,10 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+cloudinary.config(
+  cloud_name = os.environ.get('samirthapa'),
+  api_key = os.environ.get('816878767891975'),
+  api_secret = os.environ.get('cqBDDQfwzRsQ3R9gQwCQ7XoJWcA'),
+  secure = True
+)

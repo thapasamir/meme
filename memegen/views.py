@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .filter import PostFilters,CatFilters
 from .decorators import unauthenticated_user,allowed_user
 from django.contrib.auth.models import Group
+from cloudinary.forms import cl_init_js_callbacks  
 #Views section of of homepage
 def home(request):
 	
