@@ -1,8 +1,8 @@
 
 {%extends 'html/base.html'%}
-{% load cloudinary %}
 {% load static %}
 {% block main %}
+{% load cloudinary %}
 <div class="container center_div">
 	<form method="POST" enctype="multipart/form-data"> 
     {% csrf_token %} 
