@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'ak*(@+@q8b*xmtzmc&qo@@3%0=-&cszc24@pb85yrp(ainda'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['memeghar.herokuapp.com','127.0.0.1:8000']
 
@@ -136,7 +136,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
     ]
 
+MEDIA_URL = '/media/'
 
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media') 
 
 
 AUTHENTICATION_BACKENDS = (
